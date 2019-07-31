@@ -6,7 +6,6 @@ clc;
 cam       = 2; % 0-based index
 fram     = 000000; % 0-based index
 calib_dir = 'D:\Sagnik\2011_09_26';
-% base_dir  = 'E:\3DForensics\Datasets\KITTI\rawData\2011_09_26_drive_0002\2011_09_26_drive_0002_sync\2011_09_26\2011_09_26_drive_0002_sync';
 base_dir  = 'D:\Sagnik';
 
 calib = loadCalibrationCamToCam(fullfile(calib_dir,'calib_cam_to_cam.txt'));
@@ -19,40 +18,12 @@ leftI = imread('D:\Sagnik\RAW YOLO\0000000917_2.png');
 rightI = imread('D:\Sagnik\RAW YOLO\0000000917_3.png');
 frameLeftGray  = rgb2gray(leftI);
 frameRightGray = rgb2gray(rightI);
-%{
-
-%Person2
-min_x = 808;
-max_x = 871;
-min_y = 163;
-max_y = 339;
-
-%Person1
-min_y = 165;
-max_y = 347;
-min_x = 226;
-max_x = 313;
-%Dog
-min_x = 94;
-max_x = 225;
-min_y = 269;
-max_y = 349;
-
-
-%Person3
-min_x = 375;
-max_x = 409;
-min_y = 165;
-max_y = 250;
-%}
 
 %2D BB Coordinates
 min_x = 231;
 max_x = 273;
 min_y = 200;
 max_y = 335;
-
-
 
 
 %Center of Bounding Box Calculations
