@@ -5,17 +5,17 @@ clc;
 %%%%%% Reading Calib data needed for projection
 cam       = 2; % 0-based index
 fram     = 000000; % 0-based index
-calib_dir = 'D:\Sagnik\2011_09_26';
+calib_dir = 'D:\Sagnik\attack\calib';
 base_dir  = 'D:\Sagnik';
 
-calib = loadCalibrationCamToCam(fullfile(calib_dir,'calib_cam_to_cam.txt'));
-Tr_velo_to_cam = loadCalibrationRigid(fullfile(calib_dir,'calib_velo_to_cam.txt'));
+calib = loadCalibrationCamObject(fullfile(calib_dir,'001041.txt'));
+Tr_velo_to_cam = loadCalibrationTr_velo_to_cam(fullfile(calib_dir,'001041.txt'));
 
 R_cam_to_rect = eye(4);
 R_cam_to_rect(1:3,1:3) = calib.R_rect{1};
 P_velo_to_img = calib.P_rect{cam+1}*R_cam_to_rect*Tr_velo_to_cam;
-leftI = imread('D:\Sagnik\RAW YOLO\0000000917_2.png');
-rightI = imread('D:\Sagnik\RAW YOLO\0000000917_3.png');
+leftI = imread('D:\Sagnik\attack\001041_2.png');
+rightI = imread('D:\Sagnik\attack\001041_3.png');
 frameLeftGray  = rgb2gray(leftI);
 frameRightGray = rgb2gray(rightI);
 
@@ -73,13 +73,13 @@ im2 = im2';
 
 %orig = dlmread(sprintf('%s%s%d%s', base_dir, '\velodyne_points\txt_points\', frame, '.txt'));
 % for bin files
-fid = fopen('D:\Sagnik\RAW YOLO\0000000917.bin','rb');
-velo = fread(fid,[4 inf],'single')';
+%fid = fopen('D:\Sagnik\RAW YOLO\0000000.bin','rb');
+%velo = fread(fid,[4 inf],'single')';
 %velo = velo(1:5:end,:); % remove every 5th point for display speed
-fclose(fid);
+%fclose(fid);
 
 %Velo for Original velodyne File and p for Generated Point cloud 
-figure,pcshow(velo(:,1:3));
+figure,pcshow(p(:,1:3));
 hold on;
 plot3(im2(:,1),im2(:,2),im2(:,3),'r*');
 hold on;
